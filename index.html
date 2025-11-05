@@ -8,7 +8,7 @@
     <!-- 1. Fontes (Padrão V3) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;1,700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome para ícones (para os checklists) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -238,7 +238,7 @@
 
         /* Ícone de checklist */
         li::before {
-            content: '\f00c'; /* Font Awesome check */
+            content: '00c'; /* Font Awesome check */
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             color: var(--accent-color);
@@ -260,7 +260,7 @@
 
         /* Estilo para blocos de "Avalie" */
         .evaluation-point {
-            background-color: rgba(6, 25, 42, 0.5); /* --primary-bg com opacidade */
+background-color: rgba(6, 25, 42, 0.5); /* --primary-bg com opacidade */
             border: 1px dashed var(--border-color);
             border-left: 4px solid var(--accent-color);
             padding: var(--space-sm);
@@ -270,7 +270,7 @@
         }
 
         .evaluation-point::before {
-            content: '\f06e'; /* Font Awesome eye */
+            content: '06e'; /* Font Awesome eye */
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             color: var(--accent-color);
@@ -289,7 +289,7 @@
 
         /* Mudar ícone de LIs aninhados */
         .evaluation-point li::before {
-             content: '\f105'; /* Seta 'chevron-right' */
+             content: '105'; /* Seta 'chevron-right' */
              font-size: 1rem;
              top: 6px;
         }
@@ -329,6 +329,14 @@
         
         .tab-button i {
             margin-right: 8px;
+        }
+        
+        /* Ajuste responsivo para os botões das abas */
+        @media (max-width: 768px) {
+            .tab-button {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
         }
 
         .tab-button:hover {
@@ -412,7 +420,7 @@
         }
 
         .tab-content-full ul li::before {
-            content: '\f105'; /* Seta 'chevron-right' */
+            content: '105'; /* Seta 'chevron-right' */
             color: var(--accent-color);
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
@@ -436,7 +444,7 @@
         
         .tab-content-full ul li::before {
              /* Sobrescreve o ícone padrão para listas que não são checklists */
-            content: '\f105';
+            content: '105';
         }
         
         .tab-content-full ul.checklist li::before {
@@ -487,6 +495,32 @@
             font-weight: 600;
         }
         
+        /* Tabela (ADICIONADO) */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            table-layout: fixed; /* Ajuda na responsividade */
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1rem;
+            text-align: left;
+            color: var(--text-subtle);
+            word-wrap: break-word; /* Quebra palavras longas */
+        }
+
+        th {
+            background-color: rgba(0, 232, 0, 0.1); /* Fundo verde transparente */
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: rgba(0, 0, 0, 0.1); /* Zebrado sutil */
+        }
+        
 
         /* Estilos para o fluxo */
         .fluxo-card li strong {
@@ -495,17 +529,41 @@
         }
         
         .fluxo-card li::before {
-            content: '\f271'; /* 'calendar-check' */
+            content: '271'; /* 'calendar-check' */
         }
         
         .fluxo-card ul ul li::before {
-             content: '\f105'; /* Seta 'chevron-right' */
+             content: '105'; /* Seta 'chevron-right' */
         }
         
         .fluxo-card .check-item::before {
-             content: '\f00c'; /* check */
+             content: '00c'; /* check */
              font-size: 1rem;
              top: 6px;
+        }
+        
+        /* Botão de Impressão (Google Doc) (ADICIONADO) */
+        .gdoc-button {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--primary-bg); /* Texto escuro para contraste */
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-bottom: var(--space-md);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .gdoc-button:hover {
+            background-color: #00c600; /* Verde um pouco mais claro no hover */
+            transform: translateY(-2px);
+            box-shadow: var(--accent-glow);
+        }
+
+        .gdoc-button i {
+            margin-right: 0.5rem;
         }
 
     </style>
@@ -642,10 +700,21 @@
                         <button class="tab-button" onclick="openTab(event, 'tab-perguntas')"><i class="fa-solid fa-clipboard-question"></i> Banco de Perguntas (Seção 5)</button>
                         <button class="tab-button" onclick="openTab(event, 'tab-roleplay')"><i class="fa-solid fa-user-group"></i> Roteiro de Role Play (Seção 7)</button>
                         <button class="tab-button" onclick="openTab(event, 'tab-integracao')"><i class="fa-solid fa-sitemap"></i> Guia de Integração</button>
+                        <!-- NOVA ABA ADICIONADA -->
+                        <button class="tab-button" onclick="openTab(event, 'tab-comportamental')"><i class="fa-solid fa-brain"></i> Análise Comportamental</button>
                     </div>
 
                     <!-- Conteúdo Aba 1: Ficha de Avaliação (Seção 8) -->
                     <div id="tab-ficha" class="tab-content active tab-content-full">
+                        <!-- LINK DO GDOC ADICIONADO -->
+                        <a href="https://docs.google.com/document/d/1ZYAfJutV3TDhaZtZEVG-JNyDrLyC9VZMaoZK8dQh4rk/edit?usp=sharing" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="gdoc-button">
+                            <i class="fa-solid fa-print"></i> Abrir Versão para Impressão (GDoc)
+                        </a>
+                        <hr>
+                        
                         <p>A avaliação deve ser baseada em critérios objetivos e padronizados para garantir justiça e comparabilidade. Recomenda-se o uso de uma Ficha de Avaliação por Candidato.</p>
                         
                         <h4>8.1 Estrutura da Ficha de Avaliação</h4>
@@ -734,6 +803,15 @@
 
                     <!-- Conteúdo Aba 2: Checklist de Condução (Seção 9) -->
                     <div id="tab-checklist" class="tab-content tab-content-full">
+                        <!-- LINK DO GDOC ADICIONADO -->
+                        <a href="https://docs.google.com/document/d/1KJKjydQ9fEG6IXMjhbly-41R6UikASxOCqz4UMnZmSM/edit?usp=sharing" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="gdoc-button">
+                            <i class="fa-solid fa-print"></i> Abrir Versão para Impressão (GDoc)
+                        </a>
+                        <hr>
+                        
                         <p>Este checklist garante que o entrevistador não esqueça de nenhuma etapa crucial do processo, mantendo a padronização.</p>
 
                         <h4>9.1 Pré-Entrevista</h4>
@@ -789,6 +867,15 @@
                     
                     <!-- Conteúdo Aba 3: Banco de Perguntas (Seção 5) -->
                     <div id="tab-perguntas" class="tab-content tab-content-full">
+                        <!-- LINK DO GDOC ADICIONADO -->
+                        <a href="https://docs.google.com/document/d/1aM6Ueq-AKn5uE2-wsdKArBXpQr2vvBoYrnROnmNSWBU/edit?usp=sharing" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="gdoc-button">
+                            <i class="fa-solid fa-print"></i> Abrir Versão para Impressão (GDoc)
+                        </a>
+                        <hr>
+
                         <p>Use este banco para conduzir a entrevista estruturada. Selecione as perguntas mais relevantes para o perfil da vaga.</p>
 
                         <h4>5.1 Bloco 1: Apresentação e Motivação (5-10 min)</h4>
@@ -891,6 +978,15 @@
                     
                     <!-- Conteúdo Aba 4: Roteiro de Role Play (Seção 7) -->
                     <div id="tab-roleplay" class="tab-content tab-content-full">
+                        <!-- LINK DO GDOC ADICIONADO -->
+                        <a href="https://docs.google.com/document/d/1CsD2sPqHZ196DAd98G5wSpXs1PsE5EuGrMxC52Uqb3U/edit?usp=sharing" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="gdoc-button">
+                            <i class="fa-solid fa-print"></i> Abrir Versão para Impressão (GDoc)
+                        </a>
+                        <hr>
+                        
                         <p>Dinâmicas de grupo são úteis para alto volume de vagas. Para vagas de vendedor, o Role Play individual é mais rápido e eficaz para avaliar as competências essenciais.</p>
 
                         <h4>7.1 Role Play: Simulação de Venda (10-15 min)</h4>
@@ -960,6 +1056,162 @@
                             <li>Dúvidas comuns e respostas</li>
                             <li>Métricas de sucesso</li>
                         </ul>
+                    </div>
+                    
+                    <!-- NOVA ABA ADICIONADA: Análise Comportamental -->
+                    <div id="tab-comportamental" class="tab-content tab-content-full">
+                        <h3><i class="fa-solid fa-brain"></i> Roteiro de Análise Comportamental</h3>
+                        <p>Esta é a etapa mais crucial. 9 em cada 10 demissões ocorrem por comportamento, não por falha técnica. Este guia ajuda a identificar o perfil *real* do candidato.</p>
+                        
+                        <h4>1. A Técnica STAR (Analisando o que ele fez)</h4>
+                        <p>Para avaliar competências, use a <strong>Técnica STAR</strong>. Não aceite respostas teóricas (ex: "Eu sou proativo"). Exija exemplos concretos (ex: "Conte-me uma situação em que você fez além do que era esperado").</p>
+                        <p><strong>Como fazer:</strong> Para cada pergunta comportamental (veja a aba "Perguntas"), organize a resposta do candidato mentalmente:</p>
+                        <ul>
+                            <li><strong>(S) Situação:</strong> Qual era o contexto?</li>
+                            <li><strong>(T) Tarefa:</strong> Qual era o seu objetivo?</li>
+                            <li><strong>(A) Ação:</strong> O que <strong>você</strong> fez concretamente? (Cuidado com "nós fizemos")</li>
+                            <li><strong>(R) Resultado:</strong> Qual foi o desfecho? O que você aprendeu?</li>
+                        </ul>
+                        <div style="overflow-x: auto;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Competência Avaliada</th>
+                                        <th>Exemplo de Pergunta (use a aba "Perguntas")</th>
+                                        <th>O que você deve avaliar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Resiliência / Pressão</strong></td>
+                                        <td>"Fale sobre um momento em que você teve que trabalhar sob pressão..."</td>
+                                        <td>Capacidade de manter a calma e tomar medidas eficazes sob estresse.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Inteligência Emocional</strong></td>
+                                        <td>"Descreva um conflito que você enfrentou no trabalho e como o resolveu."</td>
+                                        <td>Habilidade de lidar com desentendimentos (escuta ativa, paciência, busca por consenso).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Aprendizado com Erros</strong></td>
+                                        <td>"Conte-me sobre um erro que você cometeu e o que aprendeu com ele."</td>
+                                        <td>Capacidade de autocrítica e foco em ações corretivas (não em culpar os outros).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Proatividade / Iniciativa</strong></td>
+                                        <td>"O que você costumava fazer em dias de baixo movimento na loja?"</td>
+                                        <td>Avaliar se o candidato busca soluções (estudar produtos, organizar seção) ou espera ordens.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4>2. Análise da Linguagem Corporal (Como ele se expressa)</h4>
+                        <p>Observe se a comunicação não verbal (corpo) está em <strong>consonância</strong> com a fala (voz). A opinião é formada nos primeiros minutos. Não avalie gestos isolados, mas o conjunto.</p>
+                        
+                        <h5>Aspectos Positivos (Confiança e Interesse):</h5>
+                        <div style="overflow-x: auto;">
+                            <table>
+                                <thead>
+                                    <tr><th>Postura / Gesto</th><th>Mensagem Transmitida (Positiva)</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><strong>Postura Ereta</strong></td><td>Autoconfiança, seriedade. Pés no chão.</td></tr>
+                                    <tr><td><strong>Contato Visual</strong></td><td>Atenção, foco, respeito.</td></tr>
+                                    <tr><td><strong>Gestos Coerentes</strong></td><td>Sinceridade, gesticulação natural e relaxada.</td></tr>
+                                    <tr><td><strong>Tronco Voltado ao Recrutador</strong></td><td>Envolvimento, atenção, confiança.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <h5>Sinais de Alerta (Nervosismo, Desinteresse ou Incoerência):</h5>
+                        <div style="overflow-x: auto;">
+                            <table>
+                                <thead>
+                                    <tr><th>Postura / Gesto</th><th>Mensagem Transmitida (Negativa)</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><strong>Falta de Postura</strong></td><td>Indiferença, desleixo ("esparramar-se na cadeira").</td></tr>
+                                    <tr><td><strong>Movimentos de Nervosismo</strong></td><td>Bater dedos, chacoalhar pés, tocar o pescoço/cabeça.</td></tr>
+                                    <tr><td><strong>Desvio do Olhar</strong></td><td>Desconforto ou falta de foco.</td></tr>
+                                    <tr><td><strong>Mudança Frequente de Posição</strong></td><td>Pode revelar incoerência com o conteúdo verbal.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4>3. Análise do Temperamento (Quem ele é)</h4>
+                        <p>O objetivo é verificar a compatibilidade (Fit Cultural) entre o perfil <strong>inato</strong> do candidato e as exigências da função de vendas na Casa Goianita.</p>
+                        <div style="overflow-x: auto;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Temperamento</th>
+                                        <th>Foco</th>
+                                        <th>Características Chave Positivas</th>
+                                        <th>Desafios / Pontos a Corrigir</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Colérico</strong></td>
+                                        <td>Ação / Fogo</td>
+                                        <td>Determinado, ambicioso, líder nato, persistente.</td>
+                                        <td>Impaciência, autoritarismo, intolerância a falhas.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Melancólico</strong></td>
+                                        <td>Reflexão / Terra</td>
+                                        <td>Analítico, profundo, detalhista, organizado, ético.</td>
+                                        <td>Tendência ao pessimismo, excessivamente crítico.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Sanguíneo</strong></td>
+                                        <td>Comunicação / Ar</td>
+                                        <td>Extrovertido, otimista, sociável, comunicativo, carismático.</td>
+                                        <td>Indisciplinado, inconstante, superficialidade.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Fleumático</strong></td>
+                                        <td>Estabilidade / Água</td>
+                                        <td>Calmo, paciente, confiável, diplomático, bom ouvinte.</td>
+                                        <td>Preguiça, inércia, dificuldade com mudanças, indecisão.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4>4. Checklist de Alinhamento (Vendedor Casa Goianita)</h4>
+                        <p>Durante a entrevista, compare o que você observou com o perfil ideal para a vaga:</p>
+                        <div style="overflow-x: auto;">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Necessidade da Vaga</th>
+                                        <th>Alinhamento de Perfil/Temperamento Ideal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Empatia/Relacionamento</strong></td>
+                                        <td>Traços fortes de <strong>Sanguíneo</strong> (comunicativo) ou <strong>Fleumático</strong> (bom ouvinte).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Resiliência (Lidar com "Não")</strong></td>
+                                        <td>Traços de <strong>Fleumático</strong> (calmo sob pressão) ou <strong>Sanguíneo</strong> (otimista, "perdoa e esquece").</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Proatividade (Abordar cliente)</strong></td>
+                                        <td>Traços fortes de <strong>Colérico</strong> (foco na ação) ou <strong>Sanguíneo</strong> (extrovertido).</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Organização (Gerir tarefas)</strong></td>
+                                        <td>Traços de <strong>Melancólico</strong> (detalhista) ou <strong>Fleumático</strong> (rotina).</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr>
+                        <p><strong>Resumo da Análise:</strong> O currículo e as habilidades técnicas (Hard Skills) são os <strong>tijolos</strong>. O perfil comportamental e o temperamento (Soft Skills) são a <strong>planta e o tipo de solo</strong>. Não adianta ter os melhores tijolos se o solo (temperamento) for instável para a função.</p>
                     </div>
 
                 </div>
